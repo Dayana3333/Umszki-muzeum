@@ -1,0 +1,135 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UMSZKI Múzeum</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="background"></div>
+
+  <div class="book-container">
+
+    <div class="book" id="book">
+
+      <!-- PAGE 1 -->
+
+      <div class="page active">
+        <div class="front cover-page">
+
+          <h1>UMSZKI</h1>
+
+          <p>Digitális Emlékkönyv</p>
+
+          <button onclick="nextPage()">
+            Könyv megnyitása
+          </button>
+
+        </div>
+
+        <div class="back">
+          <div class="page-content">
+
+            <h2>Az Iskola Története</h2>
+
+            <p>
+              Az UMSZKI több generáció emlékeit őrzi.
+              A múzeum célja az iskola múltjának bemutatása.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 2 -->
+
+      <div class="page">
+
+        <div class="front">
+
+          <div class="page-content">
+
+            <h2>1927</h2>
+
+            <p>
+              Az iskola alapítása és az első osztályok indulása.
+            </p>
+
+            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=1974&auto=format&fit=crop">
+
+          </div>
+
+        </div>
+
+        <div class="back">
+
+          <div class="page-content">
+
+            <h2>1950</h2>
+
+            <p>
+              Modern laborok és technikai fejlesztések.
+            </p>
+
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop">
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- PAGE 3 -->
+
+      <div class="page">
+
+        <div class="front">
+
+          <div class="page-content">
+
+            <h2>2000</h2>
+
+            <p>
+              Digitális oktatás és modern technológiák.
+            </p>
+
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2032&auto=format&fit=crop">
+
+          </div>
+
+        </div>
+
+        <div class="back last-page">
+
+          <h2>Köszönjük a látogatást!</h2>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="prevPage()">⬅</button>
+
+    <button onclick="nextPage()">➡</button>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
