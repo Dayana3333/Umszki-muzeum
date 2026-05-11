@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>UMSZKI Múzeum</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,37 +15,87 @@
 
 <div class="bg"></div>
 
-<header class="title">
-    <h1>UMSZKI Múzeum</h1>
-    <p>Digitális emlékkönyv</p>
-</header>
+<div class="scene">
 
-<div class="wrapper">
+    <div class="book-shadow"></div>
 
-    <button class="nav left" onclick="prevSpread()">❮</button>
+    <div class="book">
 
-    <div class="scene">
+        <!-- COVER -->
+        <div class="cover" id="cover">
 
-        <div class="book-shadow"></div>
+            <div class="cover-front">
 
-        <div class="book">
+                <div class="cover-light"></div>
 
-            <div class="cover-glow"></div>
+                <div class="cover-content">
 
-            <div class="spread">
-
-                <div class="page left-page" id="leftPage">
-                    <div class="paper">
-                        <div class="content" id="leftContent"></div>
+                    <div class="cover-small">
+                        UMSZKI
                     </div>
+
+                    <h1>
+                        Múzeum
+                    </h1>
+
+                    <p>
+                        Digitális Emlékkönyv
+                    </p>
+
                 </div>
 
-                <div class="spine"></div>
+                <div class="gold tl"></div>
+                <div class="gold tr"></div>
+                <div class="gold bl"></div>
+                <div class="gold br"></div>
 
-                <div class="page right-page" id="rightPage">
-                    <div class="paper">
-                        <div class="content" id="rightContent"></div>
+            </div>
+
+        </div>
+
+        <!-- BOOK -->
+        <div class="spread">
+
+            <div class="page-stack left-stack"></div>
+            <div class="page-stack right-stack"></div>
+
+            <!-- LEFT -->
+            <div class="page left-page" id="leftPage">
+
+                <div class="paper">
+                    <div class="content" id="leftContent"></div>
+                </div>
+
+            </div>
+
+            <div class="spine"></div>
+
+            <!-- RIGHT -->
+            <div class="page right-page" id="rightPage">
+
+                <div class="paper">
+                    <div class="content" id="rightContent"></div>
+                </div>
+
+            </div>
+
+            <!-- FLIPPING PAGE -->
+            <div class="flip-page" id="flipPage">
+
+                <div class="flip-sheet">
+
+                    <div class="flip-face front-face">
+                        <div class="paper">
+                            <div class="content" id="flipFront"></div>
+                        </div>
                     </div>
+
+                    <div class="flip-face back-face">
+                        <div class="paper">
+                            <div class="content" id="flipBack"></div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -54,11 +104,8 @@
 
     </div>
 
-    <button class="nav right" onclick="nextSpread()">❯</button>
-
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
