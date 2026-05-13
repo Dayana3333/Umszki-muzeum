@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* style.css */
 
 *{
@@ -230,7 +229,6 @@ body{
   }
 
 }
-=======
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
 height:100vh;
@@ -358,4 +356,3 @@ animation:flipPrev 1.4s cubic-bezier(.23,.72,.18,1) forwards;
 .content p{font-size:22px;}
 .title h1{font-size:38px;}
 }
->>>>>>> parent of f374245 (Update style.css)
