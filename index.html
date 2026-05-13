@@ -1,111 +1,36 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>UMSZKI Múzeum</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMSZKI Múzeum - Digitális Emlékkönyv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-<div class="bg"></div>
-
-<div class="scene">
-
-    <div class="book-shadow"></div>
-
-    <div class="book">
-
-        <!-- COVER -->
-        <div class="cover" id="cover">
-
-            <div class="cover-front">
-
-                <div class="cover-light"></div>
-
-                <div class="cover-content">
-
-                    <div class="cover-small">
-                        UMSZKI
-                    </div>
-
-                    <h1>
-                        Múzeum
-                    </h1>
-
-                    <p>
-                        Digitális Emlékkönyv
-                    </p>
-
-                </div>
-
-                <div class="gold tl"></div>
-                <div class="gold tr"></div>
-                <div class="gold bl"></div>
-                <div class="gold br"></div>
-
-            </div>
-
-        </div>
-
-        <!-- BOOK -->
-        <div class="spread">
-
-            <div class="page-stack left-stack"></div>
-            <div class="page-stack right-stack"></div>
-
-            <!-- LEFT -->
-            <div class="page left-page" id="leftPage">
-
-                <div class="paper">
-                    <div class="content" id="leftContent"></div>
-                </div>
-
-            </div>
-
-            <div class="spine"></div>
-
-            <!-- RIGHT -->
-            <div class="page right-page" id="rightPage">
-
-                <div class="paper">
-                    <div class="content" id="rightContent"></div>
-                </div>
-
-            </div>
-
-            <!-- FLIPPING PAGE -->
-            <div class="flip-page" id="flipPage">
-
-                <div class="flip-sheet">
-
-                    <div class="flip-face front-face">
+    <div class="bg"></div>
+    <div class="wrapper">
+        <div class="scene">
+            <div class="book-shadow"></div>
+            <div class="book">
+                <div class="cover-glow"></div>
+                <div class="spread">
+                    <div class="page left-page" id="leftPage">
                         <div class="paper">
-                            <div class="content" id="flipFront"></div>
+                            <div class="content" id="leftContent"></div>
                         </div>
                     </div>
-
-                    <div class="flip-face back-face">
+                    <div class="spine"></div>
+                    <div class="page right-page" id="rightPage">
                         <div class="paper">
-                            <div class="content" id="flipBack"></div>
+                            <div class="content" id="rightContent"></div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
