@@ -97,8 +97,8 @@ animation:floatGlow 6s ease-in-out infinite;
 50%{transform:translateY(-8px) scale(1.02);opacity:.9;}
 }
 .number{font-size:20px;letter-spacing:3px;opacity:.65;margin-bottom:18px;position:relative;}
-.content h2{font-family:'Cinzel', serif;font-size:46px;margin-bottom:24px;line-height:1.1;position:relative;background:linear-gradient(to right,#3f2417,#7d5238);-webkit-background-clip:text;color:transparent;}
-.content p{font-size:32px;line-height:1.5;max-width:95%;position:relative;background:linear-gradient(to right,#2f190e,#6b422d);-webkit-background-clip:text;color:transparent;}
+.content h2{font-family:'Cinzel', serif;font-size:46px;margin-bottom:24px;line-height:1.1;position:relative;background:linear-gradient(to right,#3f2417,#7d5238);background-clip:text;-webkit-background-clip:text;color:transparent;}
+.content p{font-size:32px;line-height:1.5;max-width:95%;position:relative;background:linear-gradient(to right,#2f190e,#6b422d);background-clip:text;-webkit-background-clip:text;color:transparent;}
 .corner{position:absolute;right:0;bottom:0;width:120px;height:120px;background:linear-gradient(135deg,transparent 50%,rgba(0,0,0,.1));clip-path:polygon(100% 0,0 100%,100% 100%);}
 .flipping-next{
 animation:flipNext 1.4s cubic-bezier(.23,.72,.18,1) forwards;
