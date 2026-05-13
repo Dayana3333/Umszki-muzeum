@@ -8,11 +8,7 @@ const items = [
 {id:7, title: 'Vákuumcső', description: 'Néhány megmaradt iskolai műhelygyakorlaton gyártott rádiócső '},
 {id:8, title: 'Műszer katódsugárcső', description: '1960-as évek'},
 {id:9, title: 'Univeka', description: 'hordozható szervizműszer hazai gyártmány, 1960'},
-<<<<<<< HEAD
-{id:10, title: 'Unavo', description: 'laboratóriumi csővoltmérő'},
-=======
 {id:10, title: 'Unavo', description: 'laboratóriumi csővoltmérő'}
->>>>>>> parent of 3a2b5b0 (Update script.js)
 ];
 
 const left = document.getElementById('leftContent');
