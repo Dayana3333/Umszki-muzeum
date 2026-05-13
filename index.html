@@ -3,49 +3,311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>UMSZKI Múzeum</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+
+    font-family:'Cormorant Garamond', serif;
+
+    background:
+    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 40%),
+    linear-gradient(to bottom, #2d1a11, #120b07);
+
+    color:white;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.background{
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at center, rgba(255,255,255,0.03), transparent 50%);
+
+    pointer-events:none;
+}
+
+.museum-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.museum-title h1{
+    font-family:'Cinzel', serif;
+    font-size:52px;
+    letter-spacing:3px;
+}
+
+.museum-title p{
+    margin-top:10px;
+    font-size:22px;
+    opacity:0.8;
+}
+
+.book-wrapper{
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.book-container{
+    perspective:3500px;
+    position:relative;
+}
+
+.book-spine{
+    position:absolute;
+
+    left:50%;
+    top:0;
+
+    transform:translateX(-50%);
+
+    width:24px;
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        to right,
+        #2f1d14,
+        #5b3928,
+        #2f1d14
+    );
+
+    z-index:0;
+}
+
+.book{
+    position:relative;
+
+    width:1000px;
+    height:650px;
+
+    transform-style:preserve-3d;
+}
+
+.page{
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    transform-origin:left center;
+    transform-style:preserve-3d;
+
+    transition:
+    transform 1.6s cubic-bezier(.77,0,.18,1);
+
+    cursor:pointer;
+}
+
+.page.flipped{
+    transform:rotateY(-180deg);
+}
+
+.front,
+.back{
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    backface-visibility:hidden;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(to bottom, #f6ebd3, #ead9b3);
+
+    color:#2d1a11;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,0.45);
+}
+
+.back{
+    transform:rotateY(180deg);
+}
+
+.cover-page{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    background:
+    linear-gradient(135deg, #3b2418, #6f4730, #2d1a11);
+
+    color:#f8e9c5;
+}
+
+.cover-page h1{
+    font-family:'Cinzel', serif;
+    font-size:110px;
+}
+
+.cover-page p{
+    font-size:34px;
+    margin-top:20px;
+}
+
+.cover-page button{
+    margin-top:50px;
+
+    padding:18px 44px;
+
+    border:none;
+    border-radius:999px;
+
+    background:#d7b176;
+
+    font-size:22px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.page-content{
+    height:100%;
+    padding:60px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.page-number{
+    font-size:18px;
+    opacity:0.6;
+    margin-bottom:15px;
+}
+
+.page-content h2{
+    font-family:'Cinzel', serif;
+    font-size:44px;
+    margin-bottom:25px;
+}
+
+.page-content p{
+    font-size:29px;
+    line-height:1.5;
+}
+
+.nav-btn{
+    width:75px;
+    height:75px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#d7b176;
+
+    font-size:36px;
+
+    cursor:pointer;
+}
+
+.bottom-info{
+    margin-top:30px;
+    opacity:0.7;
+    font-size:18px;
+}
+
+@media(max-width:1150px){
+
+    .book{
+        width:92vw;
+        height:72vh;
+    }
+
+    .cover-page h1{
+        font-size:70px;
+    }
+
+    .page-content h2{
+        font-size:32px;
+    }
+
+    .page-content p{
+        font-size:22px;
+    }
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="bg"></div>
+<div class="background"></div>
 
-<header class="title">
+<div class="museum-title">
     <h1>UMSZKI Múzeum</h1>
     <p>Digitális emlékkönyv</p>
-</header>
+</div>
 
-<div class="wrapper">
+<div class="book-wrapper">
 
-    <button class="nav left" onclick="prevSpread()">❮</button>
+    <button class="nav-btn" onclick="prevPage()">❮</button>
 
-    <div class="scene">
+    <div class="book-container">
 
-        <div class="book-shadow"></div>
+        <div class="book-spine"></div>
 
-        <div class="book">
+        <div class="book" id="book">
 
-            <div class="cover-glow"></div>
+            <div class="page">
 
-            <div class="spread">
+                <div class="front cover-page">
+                    <div>
+                        <h1>UMSZKI</h1>
 
-                <div class="page left-page" id="leftPage">
-                    <div class="paper">
-                        <div class="content" id="leftContent"></div>
+                        <p>Múzeumi Gyűjtemény</p>
+
+                        <button onclick="nextPage()">
+                            Megnyitás
+                        </button>
                     </div>
                 </div>
 
-                <div class="spine"></div>
+                <div class="back">
 
-                <div class="page right-page" id="rightPage">
-                    <div class="paper">
-                        <div class="content" id="rightContent"></div>
+                    <div class="page-content">
+
+                        <div class="page-number">
+                            UMSZKI Múzeum
+                        </div>
+
+                        <h2>Iskolai emlékek</h2>
+
+                        <p>
+                            Az iskola történelmi laboratóriumi és technikai eszközeinek digitális gyűjteménye.
+                        </p>
+
                     </div>
+
                 </div>
 
             </div>
@@ -54,11 +316,129 @@
 
     </div>
 
-    <button class="nav right" onclick="nextSpread()">❯</button>
+    <button class="nav-btn" onclick="nextPage()">❯</button>
 
 </div>
 
-<script src="script.js"></script>
+<div class="bottom-info">
+    SPACE / → : következő oldal • ← : előző oldal
+</div>
+
+<script>
+
+const museumItems = [
+    {
+        id: 1,
+        title: "Tükrös galvanométer",
+        description: "Dr. B. Lange cég • 1930-as évek"
+    },
+    {
+        id: 2,
+        title: "Többfunkciós elektromos mérőműszer",
+        description: "Német gyártmány • 1930-as évek"
+    },
+    {
+        id: 3,
+        title: "Működőképes stabil gőzgépmodell",
+        description: "Vizsgamunka • 1957-1958"
+    },
+    {
+        id: 4,
+        title: "Precíziós laboratóriumi kétkarú mérleg",
+        description: "Zier Károly Budapest • 1930-as évek"
+    },
+    {
+        id: 5,
+        title: "Katódsugárcső",
+        description: "1960-as évek"
+    }
+];
+
+const book = document.getElementById("book");
+
+museumItems.forEach((item) => {
+
+    const page = document.createElement("div");
+
+    page.className = "page";
+
+    page.innerHTML = `
+
+        <div class="front">
+
+            <div class="page-content">
+
+                <div class="page-number">
+                    ${item.id}. műszer
+                </div>
+
+                <h2>${item.title}</h2>
+
+                <p>${item.description}</p>
+
+            </div>
+
+        </div>
+
+        <div class="back">
+
+            <div class="page-content">
+
+                <div class="page-number">
+                    UMSZKI Múzeum
+                </div>
+
+                <h2>${item.title}</h2>
+
+                <p>
+                    Az iskola történelmi gyűjteményének része.
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+    book.appendChild(page);
+});
+
+const pages = document.querySelectorAll(".page");
+
+let currentPage = 0;
+
+function nextPage(){
+
+    if(currentPage < pages.length){
+
+        pages[currentPage].classList.add("flipped");
+
+        currentPage++;
+    }
+}
+
+function prevPage(){
+
+    if(currentPage > 0){
+
+        currentPage--;
+
+        pages[currentPage].classList.remove("flipped");
+    }
+}
+
+window.addEventListener("keydown", (e) => {
+
+    if(e.key === "ArrowRight" || e.key === " "){
+        nextPage();
+    }
+
+    if(e.key === "ArrowLeft"){
+        prevPage();
+    }
+});
+
+</script>
 
 </body>
 </html>
