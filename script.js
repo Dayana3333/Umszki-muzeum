@@ -1,10 +1,13 @@
 const items = [
-{id:1,title:'Tükrös galvanométer',description:'Dr. B. Lange cég • 1930-as évek'},
-{id:2,title:'Többfunkciós elektromos mérőműszer',description:'Német gyártmány • 1930-as évek'},
 {id:3,title:'Működőképes stabil gőzgépmodell',description:'Vizsgamunka • 1957-1958'},
 {id:4,title:'Precíziós laboratóriumi kétkarú mérleg',description:'Zier Károly Budapest • 1930-as évek'},
 {id:5,title:'Katódsugárcső',description:'1960-as évek'},
-{id:6,title:'Univeka szervizműszer',description:'Hazai gyártmány • 1960'}
+{id:6,title:'Univeka szervizműszer',description:'Hazai gyártmány • 1960'},
+{id:6,title:'Univeka szervizműszer',description:'Hazai gyártmány • 1960'},
+{id:7, title: 'Vákuumcső', description: 'Néhány megmaradt iskolai műhelygyakorlaton gyártott rádiócső '},
+{id:8, title: 'Műszer katódsugárcső', description: '1960-as évek'},
+{id:9, title: 'Univeka', description: 'hordozható szervizműszer hazai gyártmány, 1960'},
+{id:10, title: 'Unavo', description: 'laboratóriumi csővoltmérő'}
 ];
 
 const left = document.getElementById('leftContent');
