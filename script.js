@@ -8,171 +8,86 @@ const items = [
 {id:7, title: 'Vákuumcső', description: 'Néhány megmaradt iskolai műhelygyakorlaton gyártott rádiócső '},
 {id:8, title: 'Műszer katódsugárcső', description: '1960-as évek'},
 {id:9, title: 'Univeka', description: 'hordozható szervizműszer hazai gyártmány, 1960'},
+<<<<<<< HEAD
 {id:10, title: 'Unavo', description: 'laboratóriumi csővoltmérő'},
+=======
+{id:10, title: 'Unavo', description: 'laboratóriumi csővoltmérő'}
+>>>>>>> parent of 3a2b5b0 (Update script.js)
 ];
 
-const leftContent = document.getElementById('leftContent');
-const rightContent = document.getElementById('rightContent');
-
-const flipFront = document.getElementById('flipFront');
-const flipBack = document.getElementById('flipBack');
-
-const flipPage = document.getElementById('flipPage');
-
+const left = document.getElementById('leftContent');
+const right = document.getElementById('rightContent');
 const leftPage = document.getElementById('leftPage');
 const rightPage = document.getElementById('rightPage');
 
-const cover = document.getElementById('cover');
-
 let spread = 0;
 let animating = false;
-let opened = false;
-
 const maxSpread = Math.ceil(items.length / 2);
 
 function createPage(item){
-
-if(!item){
-return `<div class="empty"></div>`;
-}
-
+if(!item) return '<div class="empty-page"></div>';
 return `
 <div class="page-art"></div>
-
-<div class="number">
-${item.id}. MŰSZER
-</div>
-
+<div class="number">${item.id}. MŰSZER</div>
 <h2>${item.title}</h2>
-
 <p>${item.description}</p>
-
-<div class="corner"></div>
-`;
+<div class="corner"></div>`;
 }
 
 function render(){
-
 const leftItem = items[spread * 2];
 const rightItem = items[spread * 2 + 1];
-
-leftContent.innerHTML = createPage(leftItem);
-rightContent.innerHTML = createPage(rightItem);
+left.innerHTML = createPage(leftItem);
+right.innerHTML = createPage(rightItem);
 }
 
-function openBook(){
-
-if(opened || animating) return;
-
+function flip(page, direction, callback){
+if(animating) return;
 animating = true;
 
-cover.classList.add('open');
+page.classList.remove('flipping-next','flipping-prev');
+void page.offsetWidth;
+page.classList.add(direction === 'next' ? 'flipping-next' : 'flipping-prev');
 
 setTimeout(() => {
+callback();
+}, 700);
 
-opened = true;
+setTimeout(() => {
+page.classList.remove('flipping-next','flipping-prev');
 animating = false;
-
-}, 1800);
+}, 1400);
 }
 
 function nextSpread(){
-
 if(animating) return;
-
-if(!opened){
-
-openBook();
-return;
-}
-
-const next = spread + 1;
-
-if(next >= maxSpread) return;
-
-animating = true;
-
-const currentRight = items[spread * 2 + 1];
-const nextLeft = items[next * 2];
-
-flipFront.innerHTML = createPage(currentRight);
-flipBack.innerHTML = createPage(nextLeft);
-
-flipPage.classList.remove('flip-left');
-void flipPage.offsetWidth;
-
-flipPage.classList.add('flip-right');
-
-spread = next;
-
+flip(rightPage,'next',() => {
+spread = (spread + 1) % maxSpread;
 render();
-
-setTimeout(() => {
-
-flipPage.classList.remove('flip-right');
-
-animating = false;
-
-}, 1800);
+});
 }
 
 function prevSpread(){
-
 if(animating) return;
-if(spread <= 0) return;
-
-animating = true;
-
-const prev = spread - 1;
-
-const currentLeft = items[spread * 2];
-const prevRight = items[prev * 2 + 1];
-
-flipFront.innerHTML = createPage(currentLeft);
-flipBack.innerHTML = createPage(prevRight);
-
-flipPage.classList.remove('flip-right');
-void flipPage.offsetWidth;
-
-flipPage.classList.add('flip-left');
-
-spread = prev;
-
+flip(leftPage,'prev',() => {
+spread = (spread - 1 + maxSpread) % maxSpread;
 render();
-
-setTimeout(() => {
-
-flipPage.classList.remove('flip-left');
-
-animating = false;
-
-}, 1800);
+});
 }
 
-/* CLICK TURNING */
-
-rightPage.addEventListener('click', () => {
-nextSpread();
-});
-
-leftPage.addEventListener('click', () => {
-prevSpread();
-});
-
-/* KEYBOARD */
+window.nextSpread = nextSpread;
+window.prevSpread = prevSpread;
 
 document.addEventListener('keydown', (e) => {
-
-if(e.key === 'ArrowRight'){
+if(animating) return;
+if(e.code === 'Space' || e.key === 'ArrowRight') {
 e.preventDefault();
 nextSpread();
 }
-
-if(e.key === 'ArrowLeft'){
+if(e.key === 'ArrowLeft') {
 e.preventDefault();
 prevSpread();
 }
-
 });
 
 render();
