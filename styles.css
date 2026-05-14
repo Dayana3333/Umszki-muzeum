@@ -58,3 +58,58 @@ body {
 
 /* Corner embellishment */
 .corner { position: absolute; right: 0; bottom: 0; width: 100px; height: 100px; background: linear-gradient(135deg, transparent 70%, rgba(0,0,0,0.05)); }
+
+/* full-width cover */
+.book.cover-mode .spread{
+ display:block;
+ padding:18px;
+ background:linear-gradient(145deg,#734226,#261008);
+}
+.book.cover-mode .spine,
+.book.cover-mode .left-page{display:none;}
+.book.cover-mode .right-page{
+ width:100%;
+ height:100%;
+}
+.book.cover-mode .right-page .paper{
+ border-radius:30px;
+ background:linear-gradient(145deg,#734226,#261008);
+}
+.book.cover-mode .content{
+ padding:120px;
+}
+.book.cover-mode .hard-cover h1{font-size:140px;}
+.book.cover-mode .hard-cover .sub{font-size:54px;}
+.book.cover-mode .hard-cover p{font-size:42px;color:#f5dfb4;}
+
+
+.page{transform-style:preserve-3d; will-change:transform; overflow:visible;}
+.book,.spread{transform-style:preserve-3d;}
+.paper::after{
+content:'';position:absolute;inset:0;pointer-events:none;
+background:linear-gradient(to left, rgba(0,0,0,.18), transparent 30%, transparent 70%, rgba(255,255,255,.08));
+opacity:.55;
+}
+
+
+/* stable hinge + constrained page size during flip */
+.page{
+  transform-origin:center center;
+  contain: layout paint;
+}
+.paper{
+  transform-origin: inherit;
+}
+.right-page{ transform-origin:left center; }
+.left-page{ transform-origin:right center; }
+
+.page.flipping{
+  overflow: visible;
+}
+
+.under-page{
+position:absolute; right:18px; top:18px; bottom:18px;
+left:calc(50% + 22px);
+z-index:1; pointer-events:none; visibility:hidden;
+}
+.right-page{z-index:5;background:transparent}
