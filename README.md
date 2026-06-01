@@ -1,3 +1,3 @@
 UMSZKI Múzeum
 
-https://muzeum.umszki.hu/muszerek.html
+https://dayana3333.github.io/Umszki-muzeum/
