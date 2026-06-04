@@ -22,7 +22,31 @@ let index = 0;
 let isAnimating = false;
 const book=document.querySelector('.book');
 
-function getPageHTML(i) {
+function getImageHTML(i){
+    const images = {
+        1: "images/1.jpg",
+        2: "images/2.png",
+        3: "images/3.png",
+        4: "images/4.png",
+        5: "images/5.png",
+        6: "images/6.jpg",
+        7: "images/7.png",
+        8: "images/8.jpg",
+        9: "images/9.png",
+        10: "images/10.jpg"
+    };
+
+    const item = items[i];
+    if (!item || item.cover) return '';
+
+    return `
+        <div class="image-holder">
+            <img src="${images[i] || ''}" alt="${item.title}">
+        </div>
+    `;
+}
+
+function getTextHTML(i) {
     const item = items[i];
     if (!item) return '<div class="empty"></div>';
     if (item.cover) {
@@ -42,43 +66,39 @@ function getPageHTML(i) {
 
 function render() {
     if (index === 0) {
-book.classList.add('cover-mode');
+        book.classList.add('cover-mode');
         lc.innerHTML = '';
-        rc.innerHTML = getPageHTML(0);
+        rc.innerHTML = getTextHTML(0);
         rp.classList.add('cover-page');
     } else {
-book.classList.remove('cover-mode');
+        book.classList.remove('cover-mode');
         rp.classList.remove('cover-page');
-        lc.innerHTML = getPageHTML(index);
-        rc.innerHTML = getPageHTML(index + 1);
-        urc.innerHTML = getPageHTML(index + 3);
+        lc.innerHTML = getImageHTML(index);
+        rc.innerHTML = getTextHTML(index);
+        urc.innerHTML = getTextHTML(Math.min(items.length - 1, index + 1));
     }
 }
 
 function flip(direction) {
     if (isAnimating) return;
-    
-    // Boundary checks
     if (direction > 0 && index >= items.length - 1) return;
     if (direction < 0 && index <= 0) return;
 
     isAnimating = true;
     const movingPage = direction > 0 ? rp : lp;
     const underRight=document.getElementById('underRightPage');
-    const turnAngle = direction > 0 ? -175 : 175;
 
-if(direction>0){
-document.getElementById('underRightPage').style.visibility='visible';
-} else {
-underRight.style.visibility='visible';
-underRight.querySelector('#underRightContent').innerHTML = getPageHTML(Math.max(0,index-2));
-}
+    if(direction>0){
+        underRight.style.visibility='visible';
+    } else {
+        underRight.style.visibility='visible';
+        underRight.querySelector('#underRightContent').innerHTML = getTextHTML(Math.max(1,index-1));
+    }
+
     movingPage.style.zIndex = 100;
     movingPage.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
     movingPage.style.transformOrigin = direction > 0 ? 'left center' : 'right center';
     movingPage.style.perspectiveOrigin = 'center center';
-    
-    // Pull page toward viewer so it flips OUTSIDE the book, not inside
     movingPage.style.transformStyle = 'preserve-3d';
     movingPage.style.backfaceVisibility = 'visible';
     movingPage.style.transform = direction > 0
@@ -86,31 +106,28 @@ underRight.querySelector('#underRightContent').innerHTML = getPageHTML(Math.max(
       : 'perspective(2600px) translateZ(18px) rotateY(165deg) rotateX(1.5deg) scale(0.98)';
 
     setTimeout(() => {
-        // Logic for page skipping (0 to 1, then by 2s)
-        if (direction > 0) {
-            index = index === 0 ? 1 : index + 2;
-        } else {
-            index = index === 1 ? 0 : index - 2;
-        }
-
+        index = direction > 0 ? index + 1 : index - 1;
         render();
         underRight.style.visibility='hidden';
-
-        // Reset the page position instantly
         movingPage.style.transition = 'none';
         movingPage.style.transform = 'rotateY(0deg) scale(1)';
         movingPage.style.zIndex = '';
-        
-        // Force reflow
         movingPage.offsetHeight;
         isAnimating = false;
     }, 800);
 }
 
-// Controls
+function jumpTo(target){
+    if(isAnimating) return;
+    index = target;
+    render();
+}
+
 document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') flip(1);
     if (e.key === 'ArrowLeft') flip(-1);
+    if (e.key === 'ArrowUp') jumpTo(items.length - 1);
+    if (e.key === 'ArrowDown') jumpTo(1);
 });
 
 document.addEventListener('click', e => {
@@ -118,5 +135,4 @@ document.addEventListener('click', e => {
     else flip(-1);
 });
 
-// Initial load
 render();
